@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staiger</title>
+    <meta name="description" content="Staiger - Lösningsarkitektur, Konsulttjänster och Samhällsengagemang">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: #2d3748;
+        }
+
+        .lang-en { display: none; }
+        .lang-sv { display: inline; }
+        body.en .lang-en { display: inline; }
+        body.en .lang-sv { display: none; }
+
+        /* Language switcher */
+        .lang-switch {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            display: flex;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+        }
+
+        .lang-switch button {
+            background: none;
+            border: none;
+            color: #718096;
+            cursor: pointer;
+            padding: 0.25rem 0.5rem;
+            transition: color 0.2s;
+        }
+
+        .lang-switch button:hover,
+        .lang-switch button.active {
+            color: #2d3748;
+        }
+
+        /* Main content */
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .logo {
+            margin-bottom: 0.5rem;
+        }
+
+        .logo img {
+            height: 20rem;
+            width: auto;
+        }
+
+        @media (min-width: 768px) {
+            .logo img {
+                height: 26rem;
+            }
+        }
+
+        /* Navigation links */
+        .nav-links {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .nav-links {
+                flex-direction: row;
+                gap: 4rem;
+            }
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #4a5568;
+            text-align: center;
+            transition: all 0.3s ease;
+            padding: 1rem;
+        }
+
+        .nav-link:hover {
+            color: #1a202c;
+            transform: translateY(-2px);
+        }
+
+        .nav-link h2 {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.75rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-link p {
+            font-size: 0.85rem;
+            color: #718096;
+            font-weight: 300;
+        }
+
+        .nav-link:hover p {
+            color: #4a5568;
+        }
+
+        /* Divider dots */
+        .divider {
+            display: none;
+            color: #cbd5e0;
+            font-size: 0.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .divider {
+                display: block;
+            }
+        }
+
+        /* Footer */
+        footer {
+            padding: 1.5rem;
+            text-align: center;
+            font-size: 0.75rem;
+            color: #a0aec0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Language Switcher -->
+    <div class="lang-switch">
+        <button onclick="setLanguage('sv')" id="btn-sv" class="active">Sv</button>
+        <span style="color: #cbd5e0;">|</span>
+        <button onclick="setLanguage('en')" id="btn-en">En</button>
+    </div>
+
+    <main>
+        <!-- Logo -->
+        <div class="logo">
+            <img src="staiger-logo.svg" alt="Staiger">
+        </div>
+
+        <!-- Navigation Links -->
+        <nav class="nav-links">
+            <a href="#" onclick="navigateTo('claes-philip')" class="nav-link">
+                <h2>Claes-Philip Staiger</h2>
+                <p>
+                    <span class="lang-sv">Lösningsarkitekt</span>
+                    <span class="lang-en">Solution Architect</span>
+                </p>
+            </a>
+
+            <span class="divider">●</span>
+
+            <a href="#" onclick="navigateTo('consulting')" class="nav-link">
+                <h2>Consulting</h2>
+                <p>
+                    <span class="lang-sv">Arkitektur & Integration</span>
+                    <span class="lang-en">Architecture & Integration</span>
+                </p>
+            </a>
+
+            <span class="divider">●</span>
+
+            <a href="#" onclick="navigateTo('ngo')" class="nav-link">
+                <h2>Impact</h2>
+                <p>Humanitarian & Public Sector</p>
+            </a>
+        </nav>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Staiger</p>
+    </footer>
+
+    <script>
+        let currentLang = localStorage.getItem('staiger-lang') || 'sv';
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('staiger-lang', lang);
+            updateLanguage();
+        }
+
+        function updateLanguage() {
+            document.body.classList.toggle('en', currentLang === 'en');
+            document.getElementById('btn-sv').classList.toggle('active', currentLang === 'sv');
+            document.getElementById('btn-en').classList.toggle('active', currentLang === 'en');
+        }
+
+        function navigateTo(destination) {
+            const urls = {
+                'claes-philip': { prod: 'https://claes-philip.staiger.se', local: '../claes-philip.staiger.se/index.html', bilingual: true },
+                'consulting': { prod: 'https://consulting.staiger.se', local: '../consulting.staiger.se/index.html', bilingual: true },
+                'ngo': { prod: 'https://ngo.staiger.se', local: '../ngo.staiger.se/index.html', bilingual: false }
+            };
+
+            const site = urls[destination];
+            const isLocal = window.location.hostname === 'localhost' || window.location.protocol === 'file:';
+            const useEnglish = currentLang === 'en' && site.bilingual;
+
+            if (isLocal) {
+                window.location.href = useEnglish ? site.local.replace('index.html', 'en.html') : site.local;
+            } else {
+                window.location.href = site.prod + (useEnglish ? '/en.html' : '/');
+            }
+        }
+
+        updateLanguage();
+    </script>
+
+</body>
+</html>
