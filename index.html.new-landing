@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claes-Philip Staiger</title>
+    <meta name="description" content="Claes-Philip Staiger — IT Architecture & Technology | Music & Production">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --charcoal-900: #1a1a1a;
+            --charcoal-800: #2d2d2d;
+            --charcoal-700: #404040;
+            --charcoal-600: #555555;
+            --charcoal-500: #6d6d6d;
+            --warm-50: #faf9f7;
+            --warm-100: #f5f3f0;
+            --warm-200: #e8e4df;
+            --warm-300: #d4cfc8;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--warm-50);
+            min-height: 100vh;
+            color: var(--charcoal-800);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .lang-en { display: none; }
+        .lang-sv { display: inline; }
+        body.en .lang-en { display: inline; }
+        body.en .lang-sv { display: none; }
+        .lang-block-en { display: none; }
+        .lang-block-sv { display: block; }
+        body.en .lang-block-en { display: block; }
+        body.en .lang-block-sv { display: none; }
+
+        header {
+            padding: 2.5rem 2rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1100px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .site-name {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--charcoal-900);
+            letter-spacing: 0.32em;
+            text-transform: uppercase;
+        }
+
+        .lang-switch {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .lang-btn {
+            background: none;
+            border: 1px solid transparent;
+            padding: 0.35rem 0.65rem;
+            font-size: 0.8rem;
+            font-family: 'Inter', sans-serif;
+            color: var(--charcoal-500);
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .lang-btn:hover { color: var(--charcoal-800); }
+        .lang-btn.active { color: var(--charcoal-900); border-color: var(--charcoal-300); }
+
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .intro {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .intro h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 4.5vw, 3.2rem);
+            font-weight: 400;
+            color: var(--charcoal-800);
+            line-height: 1.3;
+            margin-bottom: 1rem;
+        }
+
+        .intro p {
+            font-size: 1rem;
+            color: var(--charcoal-500);
+            max-width: 520px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        .hats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            width: 100%;
+            max-width: 900px;
+        }
+
+        .hat {
+            position: relative;
+            border-radius: 16px;
+            padding: 3rem 2.5rem;
+            min-height: 380px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            text-decoration: none;
+            color: white;
+            overflow: hidden;
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s ease;
+            cursor: pointer;
+        }
+
+        .hat:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .hat-tech {
+            background: linear-gradient(165deg, #1a2332 0%, #0f1923 40%, #1a2332 100%);
+        }
+
+        .hat-tech::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            right: -20%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(100, 160, 220, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hat-tech::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(100, 200, 180, 0.06) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hat-music {
+            background: linear-gradient(165deg, #2a1f1f 0%, #1a1214 40%, #2a1f1f 100%);
+        }
+
+        .hat-music::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            right: -20%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(200, 140, 100, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hat-music::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(180, 100, 140, 0.06) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hat-icon {
+            position: relative;
+            z-index: 1;
+            width: 52px;
+            height: 52px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .hat-tech .hat-icon { background: rgba(100, 160, 220, 0.12); }
+        .hat-music .hat-icon { background: rgba(200, 140, 100, 0.12); }
+
+        .hat-icon svg { width: 26px; height: 26px; opacity: 0.85; }
+
+        .hat-label {
+            position: relative;
+            z-index: 1;
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+            opacity: 0.5;
+        }
+
+        .hat-title {
+            position: relative;
+            z-index: 1;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 400;
+            line-height: 1.25;
+            margin-bottom: 1rem;
+        }
+
+        .hat-desc {
+            position: relative;
+            z-index: 1;
+            font-size: 0.9rem;
+            line-height: 1.65;
+            opacity: 0.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .hat-arrow {
+            position: relative;
+            z-index: 1;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            opacity: 0.7;
+            transition: opacity 0.3s ease, gap 0.3s ease;
+        }
+
+        .hat:hover .hat-arrow { opacity: 1; gap: 0.75rem; }
+        .hat-arrow svg { width: 16px; height: 16px; }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--charcoal-500);
+            font-size: 0.8rem;
+        }
+
+        footer a {
+            color: var(--charcoal-500);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        footer a:hover { color: var(--charcoal-800); }
+
+        @media (max-width: 700px) {
+            .hats { grid-template-columns: 1fr; }
+            .hat { min-height: 300px; padding: 2.5rem 2rem; }
+            .intro { margin-bottom: 2.5rem; }
+            main { padding: 2rem 1.5rem; }
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .intro { animation: fadeUp 0.8s ease-out; }
+        .hat:nth-child(1) { animation: fadeUp 0.8s ease-out 0.15s both; }
+        .hat:nth-child(2) { animation: fadeUp 0.8s ease-out 0.3s both; }
+
+        @media (prefers-reduced-motion: reduce) {
+            * { animation: none !important; transition: none !important; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="site-name">Claes-Philip Staiger</div>
+        <div class="lang-switch">
+            <button class="lang-btn active" id="btn-sv" onclick="setLang('sv')">SV</button>
+            <span class="lang-sep">|</span>
+            <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+        </div>
+    </header>
+
+    <main>
+        <div class="intro">
+            <h1>
+                <span class="lang-sv">Två professioner, en drivkraft</span>
+                <span class="lang-en">Two professions, one driving force</span>
+            </h1>
+            <p>
+                <span class="lang-sv">IT-arkitekt och teknikkonsult med 20+ års erfarenhet. Musiker och producent med livslångt engagemang. Samma sak driver båda — viljan att bygga något meningsfullt.</span>
+                <span class="lang-en">IT architect and technology consultant with 20+ years of experience. Musician and producer with a lifelong commitment. The same thing drives both — the will to create something meaningful.</span>
+            </p>
+        </div>
+
+        <div class="hats">
+            <a href="https://technology.staiger.se" class="hat hat-tech">
+                <div class="hat-icon">
+                    <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6.429 9.75L2.25 12l4.179 2.25m0-4.5l5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L12 12.75 6.429 9.75m11.142 0l4.179 2.25-9.75 5.25-9.75-5.25 4.179-2.25"/>
+                    </svg>
+                </div>
+                <div class="hat-label">
+                    <span class="lang-sv">Profession</span>
+                    <span class="lang-en">Profession</span>
+                </div>
+                <div class="hat-title">
+                    <span class="lang-sv">IT-arkitektur &<br>teknikkonsulting</span>
+                    <span class="lang-en">IT Architecture &<br>Technology Consulting</span>
+                </div>
+                <div class="hat-desc">
+                    <span class="lang-sv">Lösningsarkitektur, integration och digital transformation — med engagemang för social impact och humanitärt arbete.</span>
+                    <span class="lang-en">Solution architecture, integration and digital transformation — with commitment to social impact and humanitarian work.</span>
+                </div>
+                <div class="hat-arrow">
+                    <span class="lang-sv">Utforska</span>
+                    <span class="lang-en">Explore</span>
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                    </svg>
+                </div>
+            </a>
+
+            <a href="https://music.staiger.se" class="hat hat-music">
+                <div class="hat-icon">
+                    <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2z"/>
+                    </svg>
+                </div>
+                <div class="hat-label">
+                    <span class="lang-sv">Passion</span>
+                    <span class="lang-en">Passion</span>
+                </div>
+                <div class="hat-title">
+                    <span class="lang-sv">Musik &<br>produktion</span>
+                    <span class="lang-en">Music &<br>Production</span>
+                </div>
+                <div class="hat-desc">
+                    <span class="lang-sv">Kompositör, producent och multiinstrumentalist. Från studio till scen — musik som berör och engagerar.</span>
+                    <span class="lang-en">Composer, producer and multi-instrumentalist. From studio to stage — music that moves and engages.</span>
+                </div>
+                <div class="hat-arrow">
+                    <span class="lang-sv">Lyssna</span>
+                    <span class="lang-en">Listen</span>
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                    </svg>
+                </div>
+            </a>
+        </div>
+    </main>
+
+    <footer>
+        <span class="lang-sv">Stockholm / Visby — <a href="mailto:claes-philip@staiger.se">claes-philip@staiger.se</a></span>
+        <span class="lang-en">Stockholm / Visby — <a href="mailto:claes-philip@staiger.se">claes-philip@staiger.se</a></span>
+    </footer>
+
+    <script>
+        let currentLang = 'sv';
+
+        function setLang(lang) {
+            currentLang = lang;
+            if (lang === 'en') {
+                document.body.classList.add('en');
+            } else {
+                document.body.classList.remove('en');
+            }
+            document.getElementById('btn-sv').classList.toggle('active', lang === 'sv');
+            document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+        }
+
+        if (navigator.language && !navigator.language.startsWith('sv')) {
+            setLang('en');
+        }
+    </script>
+</body>
+</html>
