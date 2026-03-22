@@ -226,8 +226,6 @@
             opacity: 0.5;
         }
 
-        .hat-innovation .hat-label { color: var(--gold); }
-
         .hat-title {
             position: relative;
             z-index: 1;
@@ -263,36 +261,15 @@
         .hat:hover .hat-arrow { opacity: 1; gap: 0.7rem; }
         .hat-arrow svg { width: 14px; height: 14px; }
 
-        .hat-innovation .hat-arrow { color: var(--gold); opacity: 0.6; }
-        .hat-innovation:hover .hat-arrow { opacity: 1; }
-
-        /* SessionStudio logo + tagline inside Innovation box */
-        .ss-logo {
+        /* Same wordmark file as webapp login (dark theme): public/SessionStudio_logo_dark.png — see LoginScreen.jsx */
+        .hat-innovation .ss-logo {
             position: relative;
             z-index: 1;
-            max-width: 180px;
+            max-width: 200px;
+            width: 100%;
             height: auto;
-            margin: 0 auto 0.8rem;
+            margin: 0 0 0.85rem;
             display: block;
-        }
-
-        .ss-tagline {
-            position: relative;
-            z-index: 1;
-            font-size: 0.72rem;
-            line-height: 1.6;
-            opacity: 0.5;
-            text-align: center;
-            font-style: italic;
-            font-family: 'Cormorant Garamond', serif;
-            margin-bottom: 1rem;
-            flex: 1;
-        }
-
-        .ss-tagline .tagline-gold {
-            color: var(--gold);
-            font-style: italic;
-            opacity: 0.8;
         }
 
         footer {
@@ -430,11 +407,10 @@
                     <span class="lang-sv">SessionStudio™</span>
                     <span class="lang-en">SessionStudio™</span>
                 </div>
-                <img class="ss-logo" src="https://sessionstudio.se/logo_bg_transparent_header_yellow.png" alt="SessionStudio™">
-                <div class="ss-tagline">
-                    Built by artists, for artists and performers<br>
-                    and creative groups everywhere<br>
-                    <span class="tagline-gold">— Where sessions come together.</span>
+                <img class="ss-logo" src="SessionStudio_logo_dark.png" alt="SessionStudio™">
+                <div class="hat-desc">
+                    <span class="lang-sv">Byggt av artister, för artister och kreativa grupper — kalender, låtar, setlists och chatt på en plats.</span>
+                    <span class="lang-en">Built by artists, for artists and performers and creative groups everywhere — where sessions come together.</span>
                 </div>
                 <div class="hat-arrow">
                     <span class="lang-sv">Upptäck</span>
